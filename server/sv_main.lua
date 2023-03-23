@@ -1,5 +1,3 @@
-local canChangeAccountnumber, execute = nil
-
 ESX.RegisterServerCallback('tsBanking:getPlayerData', function(source, cb)
     local xPlayer      = ESX.GetPlayerFromId(source)
     local playerName   = xPlayer.getName()
