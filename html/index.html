@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tsBankingV2</title>
+    <link rel="stylesheet" href="../html/css/app.css">
+    <script src="https://kit.fontawesome.com/7ccd68dcf0.js" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            /* GENERAL SETTINGS */
+            --text-color: rgb(255, 255, 255);
+            --secondary-text-color: rgb(43, 154, 239);
+            --icon-color: rgb(0, 85, 176);
+            --line-colors: rgba(255, 255, 255, .1);
+            --general-border-color: rgba(43, 154, 239, .8);
+
+
+            /* MENU BAR SETTINGS */
+            --button-color: rgb(43, 154, 239);
+
+            /* ACCOUNT INTERACTION SETTINGS */
+            --acc-interaction-button-color: rgb(43, 154, 239);
+
+            /* KEYBOARD SETTINGS */
+            --keyboard-main-bg-color: rgba(255, 255, 255, .05);
+            --keyboard-border-color: rgb(43, 154, 239);
+            --keyboard-headline-color: rgb(255, 255, 255);
+            --keyboard-input-field-color: rgba(43, 154, 239, .4);
+            --keyboard-button-color: rgba(43, 154, 239, .4);
+            --keyboard-button-hover-color: rgba(43, 154, 239, .6);
+
+            --keyboard-del-button-color: rgba(224, 30, 30, 0.8);
+            --keyboard-del-button-border-color: rgb(255, 69, 69);
+
+            --keyboard-submit-button-color: rgba(22, 146, 11, 0.8);
+            --keyboard-submit-button-border-color: rgb(36, 196, 36);
+
+            /* CHANGE ACCOUNTNUMBER SETTINGS */
+            --change-accountnumber-color: rgba(43, 154, 239, .4);
+            --change-accountnumber-hover-color: rgba(43, 154, 239, .6);
+
+            /* CREATE NEW ACCOUNTNUMBER SETTINGS */
+            --create-accountnumber-bg-color: rgba(0, 0, 0, .4);
+            --create-accountnumber-border-color: rgb(43, 154, 239);
+            --create-accountnumber-button-color: rgba(43, 154, 239, .4);
+            --create-accountnumber-button-hover-color: rgba(43, 154, 239, .6);
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="loginSound" src="/html/assets/audio/login_sound.mp3"></audio>
+    <audio id="clickSound" src="/html/assets/audio/click_sound.mp3"></audio>
+
+    <div class="main">
+        <div class="left">
+            <div class="headline-wrapper">
+                <h1 class="headline">tsBanking<span style="color: var(--secondary-text-color);">V2</span></h1>
+            </div>
+
+            <div class="horizontal-line"></div>
+
+            <div class="buttons-wrapper">
+                <button class="button home-button"><i class="fa-solid fa-house home-icon"></i><span id="home-button"></span></button>
+                <button class="button transactions-button"><i class="fa-solid fa-arrow-right-arrow-left transfer-icon"></i><span id="transactions-button"></span></button>
+                <button class="button settings-button"><i class="fa-solid fa-sliders settings-icon"></i><span id="settings-button"></span></button>
+            </div>
+            <button class="logout-button"><i class="fa-solid fa-right-from-bracket"></i><span id="logout-button"></span></button>
+        </div>
+
+        <div class="main-line"></div>
+
+        <div class="right">
+            <div class="account-wrapper">
+                <h1 class="current-headline">Übersicht</h1>
+                <div class="account-info">
+                    <div class="account-inner-wrapper">
+                        <h2 class="accountname">Firstname Lastname</h2>
+                        <h4 class="accountnumber">IBAN: <span class="bankid">123456789</span></h4>
+                    </div>
+                    <i class="fa-solid fa-circle-user usericon"></i>
+                </div>
+            </div>
+            
+            <div class="horizontal-line2"></div>
+
+            <div class="content">
+                <div class="left-content">
+                    <div class="balance-wrapper">
+                        <div class="balance-headline-wrapper">
+                            <h3 class="balance-headline"></h3>
+                        </div>
+                        <div class="balance-content">
+                            <div class="name-wrapper"><span class="firstname ta-left">Name: </span><span class="name ta-right secondary-color">Tom Müller</span></div>
+                            <div class="accountnumber-wrapper"><span class="accountnumber ta-left">IBAN: </span><span class="bankid ta-right secondary-color">123456789</span></div>
+                            <div class="money-amount-wrapper"><span class="money-amount ta-left">Bargeld: </span><span><span class="money ta-right secondary-color">123456789</span><span class="ta-right secondary-color">$</span></span></div>
+                            <div class="bank-amount-wrapper"><span class="bank-amount ta-left" >Kontostand: </span><span><span class="bank ta-right secondary-color">123456789</span><span class="ta-right secondary-color">$</span></span></div>
+                        </div>
+                    </div>
+
+                    <div class="keyboard-wrapper">
+                        <div class="keyboard">
+                            <h2 class="keyboard-headline"></h2>
+                            <input readonly class="keyboard-input" type="text" name="keyboardinput" id="keyboardinput" placeholder="Betrag eingeben">
+                            <input class="user-input" type="text" name="transferID" id="transferID" placeholder="IBAN eingeben">
+                            <table>
+                                <tr>
+                                    <td><button class="keyboard-button number1">1</button></td>
+                                    <td><button class="keyboard-button number2">2</button></td>
+                                    <td><button class="keyboard-button number3">3</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button class="keyboard-button number4">4</button></td>
+                                    <td><button class="keyboard-button number5">5</button></td>
+                                    <td><button class="keyboard-button number6">6</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button class="keyboard-button number7">7</button></td>
+                                    <td><button class="keyboard-button number8">8</button></td>
+                                    <td><button class="keyboard-button number9">9</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button class="keyboard-button number0">0</button></td>
+                                    <td><button class="keyboard-button-special delete">DEL</button></td>
+                                    <td><button class="keyboard-button-special submit"><i class="fa-solid fa-check"></i></button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="change-accountnumber-wrapper">
+                        <div class="change-accountnumber-headline-wrapper">
+                            <h3 class="change-accountnumber-headline"></h3>
+                        </div>
+                        <div class="change-accountnumber-content">
+                            <p class="change-accountnumber-text"></p>
+                            <input type="text" name="change-accountnumber-input" class="change-accountnumber-input" placeholder="Neue IBAN eingeben">
+                            <button class="change-accountnumber-submit-button">Ändern</button>
+                        </div>
+                    </div>
+
+                    <div class="fastdeposit-buttons-wrapper">
+                        <h1 class="fastdeposit-headline"></h1>
+                        <button class="fastdeposit-button fastDeposit1">+<span class="fastdepositAmount fastdepositAmount1"></span>$</button>
+                        <button class="fastdeposit-button fastDeposit2">+<span class="fastdepositAmount fastdepositAmount2"></span>$</button>
+                        <button class="fastdeposit-button fastDeposit3">+<span class="fastdepositAmount fastdepositAmount3"></span>$</button>
+                        <button class="fastdeposit-button fastDeposit4">+<span class="fastdepositAmount fastdepositAmount4"></span>$</button>
+                    </div>
+                </div>
+                
+                <div class="right-content">
+                    <div class="account-interactions-wrapper">
+                        <div class="interaction-headline-wrapper">
+                            <h3 class="account-interaction-headline"></h3>
+                        </div>
+                        <div class="interaction-content">
+                            <button class="account-interaction-button deposit" >Einzahlen</button>
+                            <button class="account-interaction-button withdraw">Auszahlen</button>
+                            <button class="account-interaction-button transfer">Überweisen</button>
+                        </div>
+                    </div>
+
+                    <div class="transactions-wrapper">
+                        <div class="transaction-headline-wrapper">
+                            <h3 class="transactions-headline"></h3>
+                        </div>
+                        <div class="transactions-content-wrapper">
+                            <div class="transactions-content">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fastwithdraw-buttons-wrapper">
+                        <h1 class="fastwithdraw-headline"></h1>
+                        <button class="fastwithdraw-button fastWithdraw1">-<span class="fastwithdrawAmount fastwithdrawAmount1"></span>$</button>
+                        <button class="fastwithdraw-button fastWithdraw2">-<span class="fastwithdrawAmount fastwithdrawAmount2"></span>$</button>
+                        <button class="fastwithdraw-button fastWithdraw3">-<span class="fastwithdrawAmount fastwithdrawAmount3"></span>$</button>
+                        <button class="fastwithdraw-button fastWithdraw4">-<span class="fastwithdrawAmount fastwithdrawAmount4"></span>$</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="createAccountnumber-wrapper">
+        <div class="createAccountnumber">
+            <h2 class="createAccountnumber-headline">Kontonummer erstellen</h2>
+            <p class="createAccountnumber-text">Du hast noch keine Kontonummer. Bitte registriere eine indem du unten auf den Button klickst.</p>
+            <div class="createAccountnumber-spinner"></div>
+            <button class="createAccountnumber-button">IBAN erstellen</button>
+        </div>
+    </div>
+
+    <script src="./script/app.js" defer></script>
+    <script src="./script/config.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>
